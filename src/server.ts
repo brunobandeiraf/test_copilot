@@ -2,6 +2,7 @@
 import express from 'express';
 import { Request, Response } from 'express';
 import cors from 'cors';
+import "reflect-metadata";
 
 const PORT = 3000;
 const app = express();
