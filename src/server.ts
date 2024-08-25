@@ -4,6 +4,7 @@ import express from 'express';
 import { Request, Response } from 'express';
 import cors from 'cors';
 import databaseService from './services/database-service';
+import userRouter from "./routes/user";
 
 const PORT = 3000;
 const app = express();
@@ -25,6 +26,8 @@ databaseService.initialize()
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
 });
+
+app.use('/user', userRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
