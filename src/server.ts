@@ -1,8 +1,9 @@
 // Create a REST API server using Express
+import "reflect-metadata";
 import express from 'express';
 import { Request, Response } from 'express';
 import cors from 'cors';
-import "reflect-metadata";
+import databaseService from './services/database-service';
 
 const PORT = 3000;
 const app = express();
@@ -11,6 +12,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+
+databaseService.initialize()
+  .then(() => { 
+    console.log('Database connected!') 
+  })
+  .catch((error) => {
+    console.error('Error connecting to the database', error);
+    console.error(error);
+  }); 
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
